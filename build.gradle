@@ -1,0 +1,196 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.143'
+    id 'idea'
+}
+
+group = mod_group_id
+version = mod_version
+
+base {
+    archivesName = 'regions-unexplored'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+
+    withSourcesJar()
+}
+
+/*
+ * RU всё ещё физически хранит код в common/neoforge,
+ * но для Gradle это теперь один NeoForge source set.
+ */
+sourceSets {
+    main {
+        java.setSrcDirs([
+            'src/common/main/java',
+            'src/neoforge/main/java'
+        ])
+
+        resources.setSrcDirs([
+            'src/main/resources',
+            'src/common/main/resources',
+            'src/common/main/generated',
+            'src/neoforge/main/resources'
+        ])
+
+        resources.exclude('**/.cache/**')
+        resources.exclude('**/*.bbmodel')
+    }
+}
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name = 'Modrinth'
+        url = uri('https://api.modrinth.com/maven')
+    }
+}
+
+neoForge {
+    version = neo_version
+    validateAccessTransformers = true
+
+    runs {
+        client {
+            client()
+
+            systemProperty(
+                'neoforge.enabledGameTestNamespaces',
+                mod_id
+            )
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+
+            systemProperty(
+                'neoforge.enabledGameTestNamespaces',
+                mod_id
+            )
+        }
+
+        data {
+            clientData()
+
+            programArguments.addAll(
+                '--mod',
+                mod_id,
+                '--all',
+                '--output',
+                file('src/common/main/generated').absolutePath,
+                '--existing',
+                file('src/common/main/resources').absolutePath
+            )
+        }
+
+        configureEach {
+            logLevel = org.slf4j.event.Level.INFO
+        }
+    }
+
+    mods {
+        regions_unexplored {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+dependencies {
+    implementation(
+        "maven.modrinth:lithostitched:" +
+        "${lithostitched_version}-neoforge-26.1"
+    )
+
+    /*
+     * NeoForge уже использует Night Config, поэтому эти зависимости
+     * нужны RU для компиляции, но не должны встраиваться повторно.
+     */
+    compileOnly 'com.electronwill.night-config:core:3.8.3'
+    compileOnly 'com.electronwill.night-config:toml:3.8.3'
+
+    /*
+     * JSON5 действительно используется самим RU.
+     * Встраиваем его в итоговый JAR через штатный MDG Jar-in-Jar.
+     */
+    jarJar(
+        implementation('de.marhali:json5-java:3.0.0')
+    ) {
+        version {
+            strictly '[3.0.0,4.0.0)'
+            prefer '3.0.0'
+        }
+    }
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    /*
+     * Cloche раньше добавлял эти два файла вручную.
+     * Теперь это делает обычная задача processResources.
+     */
+    from('src/common/main') {
+        include 'regions_unexplored.mixins.json'
+    }
+
+    from('src/neoforge/main') {
+        include 'regions_unexplored.neoforge.mixins.json'
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    archiveFileName =
+        "regions-unexplored-${project.version}-neoforge-26.1.2.jar"
+
+    manifest {
+        attributes(
+            'Automatic-Module-Name': 'net.regions_unexplored'
+        )
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 25
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'localPortRepository'
+            url = layout.projectDirectory.dir('repo')
+        }
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+/*
+ * Generated resources can duplicate identical files from the manually
+ * maintained resources tree. This affects only the sources archive.
+ */
+tasks.named('sourcesJar', Jar).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

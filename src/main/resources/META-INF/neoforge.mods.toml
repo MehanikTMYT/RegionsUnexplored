@@ -1,0 +1,44 @@
+license="All Rights Reserved"
+issueTrackerURL="https://github.com/Apollounknowndev/RegionsUnexplored/issues"
+
+[[mods]]
+modId="regions_unexplored"
+version="0.6.1"
+displayName="Regions Unexplored"
+displayURL="https://modrinth.com/mod/regions-unexplored"
+logoFile="pack.png"
+authors="Apollo, UHQ_Games"
+credits="KelloVerra, KirboSoftware, voidsongdragonfly"
+description='''
+A stack of new biomes spread across the Overworld and Nether!
+'''
+
+[[mixins]]
+config="regions_unexplored.mixins.json"
+
+[[mixins]]
+config="regions_unexplored.neoforge.mixins.json"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
+[[dependencies.regions_unexplored]]
+modId="neoforge"
+type="required"
+versionRange="[26.1.2.81,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.regions_unexplored]]
+modId="minecraft"
+type="required"
+versionRange="[26.1.2]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.regions_unexplored]]
+modId="lithostitched"
+type="required"
+versionRange="[1.7.13,)"
+ordering="AFTER"
+side="BOTH"

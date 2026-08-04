@@ -1,5 +1,5 @@
 {
-  "parent": "tinted_cross",
+  "parent": "minecraft:block/tinted_cross",
   "textures": {
     "cross": "regions_unexplored:block/windswept_grass_top"
   }

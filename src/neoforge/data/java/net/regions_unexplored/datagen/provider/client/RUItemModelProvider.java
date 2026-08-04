@@ -25,6 +25,14 @@ public class RUItemModelProvider {
         this.itemModels.declareCustomModelItem(RUItems.IRIDESCENT_RING.get());
         
         for (WoodSet set : RUBlocks.WOOD_SETS) {
+            if (set.getSign() != null) {
+                itemGenerated(set.getSign().asItem());
+            }
+
+            if (set.getHangingSign() != null) {
+                itemGenerated(set.getHangingSign().asItem());
+            }
+
             if (set.getBoat() != null) {
                 itemGenerated(set.getBoat());
                 itemGenerated(set.getChestBoat());

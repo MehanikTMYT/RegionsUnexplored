@@ -23,11 +23,11 @@ public class RUItemUtils {
     }
 
     public static <T extends Block> Supplier<Item> registerBlock(String name, Supplier<T> block) {
-        return register(name, p -> new BlockItem(block.get(), p));
+        return register(name, p -> new BlockItem(block.get(), p.useBlockDescriptionPrefix()));
     }
 
     public static Supplier<Item> registerPlaceOnWaterBlock(String name, Supplier<Block> block) {
-        return register(name, p -> new PlaceOnWaterBlockItem(block.get(), p));
+        return register(name, p -> new PlaceOnWaterBlockItem(block.get(), p.useBlockDescriptionPrefix()));
     }
 
     public static FoodProperties food(int nutrition, float saturation) {

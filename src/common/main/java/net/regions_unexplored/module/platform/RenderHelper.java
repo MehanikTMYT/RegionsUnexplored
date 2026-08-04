@@ -4,19 +4,62 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.msrandom.multiplatform.annotations.Expect;
+import net.neoforged.neoforge.client.ClientHooks;
 
 import java.util.function.Supplier;
 
-public class RenderHelper {
-    @Expect
-    public static <T extends Entity> void registerEntityRenderer(EntityType<? extends T> entityType, EntityRendererProvider<T> entityRendererFactory);
+public final class RenderHelper {
+    private RenderHelper() {
+    }
 
-    @Expect
-    public static void registerModelLayer(ModelLayerLocation layerLocation, Supplier<LayerDefinition> supplier);
-    
-    @Expect
-    public static void registerArmorModelLayer(ArmorModelSet<ModelLayerLocation> armorModelSet, Supplier<ArmorModelSet<LayerDefinition>> provider);
+    public static <T extends Entity> void registerEntityRenderer(
+        EntityType<? extends T> entityType,
+        EntityRendererProvider<T> entityRendererFactory
+    ) {
+        EntityRenderers.register(
+            entityType,
+            entityRendererFactory
+        );
+    }
+
+    public static void registerModelLayer(
+        ModelLayerLocation layerLocation,
+        Supplier<LayerDefinition> supplier
+    ) {
+        ClientHooks.registerLayerDefinition(
+            layerLocation,
+            supplier::get
+        );
+    }
+
+    public static void registerArmorModelLayer(
+        ArmorModelSet<ModelLayerLocation> armorModelSet,
+        Supplier<ArmorModelSet<LayerDefinition>> provider
+    ) {
+        ArmorModelSet<LayerDefinition> definitions =
+            provider.get();
+
+        ClientHooks.registerLayerDefinition(
+            armorModelSet.head(),
+            definitions::head
+        );
+
+        ClientHooks.registerLayerDefinition(
+            armorModelSet.chest(),
+            definitions::chest
+        );
+
+        ClientHooks.registerLayerDefinition(
+            armorModelSet.legs(),
+            definitions::legs
+        );
+
+        ClientHooks.registerLayerDefinition(
+            armorModelSet.feet(),
+            definitions::feet
+        );
+    }
 }

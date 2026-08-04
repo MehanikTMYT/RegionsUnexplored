@@ -1,10 +1,16 @@
 package net.regions_unexplored.module.platform;
 
-import net.msrandom.multiplatform.annotations.Expect;
+import net.neoforged.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
 
-public class ConfigHelper {
-    @Expect
-    public static Path getConfigDirectory();
+public final class ConfigHelper {
+    private ConfigHelper() {
+    }
+
+    public static Path getConfigDirectory() {
+        return FMLPaths.CONFIGDIR
+            .get()
+            .resolve("regions_unexplored");
+    }
 }

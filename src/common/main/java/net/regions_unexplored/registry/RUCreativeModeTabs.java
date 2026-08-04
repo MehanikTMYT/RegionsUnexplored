@@ -7,7 +7,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.msrandom.multiplatform.annotations.Expect;
 import net.regions_unexplored.RegionsUnexplored;
 import net.regions_unexplored.block.set.NaturalSet;
 import net.regions_unexplored.block.set.WoodSet;
@@ -330,6 +329,7 @@ public interface RUCreativeModeTabs {
         consumer.accept(Items.BEETROOT, RUItems.MEADOW_SAGE.get());
     }
 
-    @Expect
-    static CreativeModeTab.Builder builder();
+    static CreativeModeTab.Builder builder() {
+        return CreativeModeTab.builder();
+    }
 }

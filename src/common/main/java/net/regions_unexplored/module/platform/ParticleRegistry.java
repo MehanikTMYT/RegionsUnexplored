@@ -4,12 +4,21 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.msrandom.multiplatform.annotations.Expect;
+import net.regions_unexplored.client.ParticleRegistration;
 
 import java.util.function.Function;
 
+public final class ParticleRegistry {
+    private ParticleRegistry() {
+    }
 
-public class ParticleRegistry {
-    @Expect
-    public static <T extends ParticleOptions> void register(ParticleType<T> type, Function<SpriteSet, ParticleProvider<T>> provider);
+    public static <T extends ParticleOptions> void register(
+        ParticleType<T> type,
+        Function<SpriteSet, ParticleProvider<T>> provider
+    ) {
+        ParticleRegistration.spriteParticleRegistrationMap.put(
+            type,
+            provider::apply
+        );
+    }
 }
