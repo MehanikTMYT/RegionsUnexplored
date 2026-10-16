@@ -2,7 +2,8 @@
   "parent": "minecraft:block/stairs",
   "textures": {
     "bottom": "regions_unexplored:block/redwood_planks",
+    "top": "regions_unexplored:block/redwood_planks",
     "side": "regions_unexplored:block/redwood_planks",
-    "top": "regions_unexplored:block/redwood_planks"
+    "particle": "regions_unexplored:block/redwood_planks"
   }
 }

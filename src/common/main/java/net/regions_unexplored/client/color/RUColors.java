@@ -1,7 +1,5 @@
 package net.regions_unexplored.client.color;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.core.BlockPos;
@@ -14,9 +12,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class RUColors {
+    public static final Map<String, Integer> WISTERIA_COLORS = Map.of(
+        "sky", 0xff81cff9,
+        "lavender", 0xffc394ef,
+        "salmon", 0xffffa3ad
+    );
+    
     public static void tintBlocks(BiConsumer<BlockTintSource, List<Block>> consumer) {
         consumer.accept(
             BlockTintSources.grassBlock(),
@@ -80,7 +85,7 @@ public class RUColors {
         );
         
         consumer.accept(
-            RUBlockTintSources.posBasedOrFoliage(RUColors::getRainbowGlassColor),
+            RUBlockTintSources.posBasedOrFoliage(RUColors::getRainbowEucalyptusColor),
             List.of(
                 RUBlocks.EUCALYPTUS_WOOD_SET.getLog(),
                 RUBlocks.EUCALYPTUS_WOOD_SET.getWood()
@@ -88,7 +93,7 @@ public class RUColors {
         );
         
         consumer.accept(
-            RUBlockTintSources.posBasedOrFoliage(RUColors::getRainbowGlassColor),
+            RUBlockTintSources.posBasedOrFoliage(RUColors::getAspenColor),
             List.of(
                 RUBlocks.SILVER_BIRCH_NATURAL_SET.getLeaves(),
                 RUBlocks.SILVER_BIRCH_LEAF_LITTER.get()

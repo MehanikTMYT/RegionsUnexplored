@@ -961,5 +961,9 @@
   "item.regions_unexplored.willow_chest_boat": "Лодка с сундуком из ивы",
   "item.regions_unexplored.wisteria_boat": "Лодка из глицинии",
   "item.regions_unexplored.wisteria_chest_boat": "Лодка из глицинии с сундуком",
-  "item_group.regions_unexplored.main": "Regions Unexplored"
+  "item_group.regions_unexplored.main": "Regions Unexplored",
+  "block.regions_unexplored.hanging_earlight_plant": "Висячий ушесвет",
+  "item.regions_unexplored.duskmelon_slice": "Ломтик сумеречной дыни",
+  "item.regions_unexplored.hanging_earlight_fruit": "Плод висячего ушесвета",
+  "item.regions_unexplored.salmonberry": "Морошка"
 }

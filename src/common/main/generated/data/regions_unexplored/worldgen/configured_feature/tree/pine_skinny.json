@@ -3,6 +3,26 @@
   "config": {
     "below_trunk_provider": {
       "type": "minecraft:rule_based_state_provider",
+      "fallback": {
+        "type": "minecraft:rule_based_state_provider",
+        "rules": [
+          {
+            "if_true": {
+              "type": "minecraft:not",
+              "predicate": {
+                "type": "minecraft:matching_block_tag",
+                "tag": "minecraft:cannot_replace_below_tree_trunk"
+              }
+            },
+            "then": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:dirt"
+              }
+            }
+          }
+        ]
+      },
       "rules": [
         {
           "if_true": {
@@ -10,7 +30,7 @@
             "tag": "regions_unexplored:peat/substrate"
           },
           "then": {
-            "type": "regions_unexplored:supplier_hack"
+            "type": "regions_unexplored:key_hack"
           }
         },
         {
@@ -19,22 +39,7 @@
             "tag": "regions_unexplored:silt/substrate"
           },
           "then": {
-            "type": "regions_unexplored:supplier_hack"
-          }
-        },
-        {
-          "if_true": {
-            "type": "minecraft:not",
-            "predicate": {
-              "type": "minecraft:matching_block_tag",
-              "tag": "minecraft:cannot_replace_below_tree_trunk"
-            }
-          },
-          "then": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "minecraft:dirt"
-            }
+            "type": "regions_unexplored:key_hack"
           }
         }
       ]

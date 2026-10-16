@@ -335,7 +335,6 @@ public class RUBlockTagProvider extends BlockTagsProvider {
             .add(RUBlocks.POTTED_CORPSE_FLOWER.get())
             .add(RUBlocks.POTTED_COBALT_EARLIGHT.get())
             .add(RUBlocks.POTTED_MYCOTOXIC_DAISY.get())
-            .add(RUBlocks.POTTED_GLISTER_SPIRE.get())
             .add(RUBlocks.POTTED_BLUE_BIOSHROOM.get())
             .add(RUBlocks.POTTED_GREEN_BIOSHROOM.get())
             .add(RUBlocks.POTTED_PINK_BIOSHROOM.get())
@@ -683,13 +682,6 @@ public class RUBlockTagProvider extends BlockTagsProvider {
     }
 
     public void addBackportedTags(HolderLookup.Provider provider) {
-        this.tag(BackportedBlockTags.SUPPORTS_CROPS)
-            .add(Blocks.FARMLAND)
-        ;
-        this.tag(BackportedBlockTags.SUPPORTS_VEGETATION)
-            .addTag(BlockTags.DIRT)
-            .add(Blocks.FARMLAND)
-        ;
         this.tag(BackportedBlockTags.SPELEOTHEMS)
             .add(Blocks.POINTED_DRIPSTONE)
             .add(RUBlocks.REDSTONE_SPIKE.get())
@@ -726,7 +718,7 @@ public class RUBlockTagProvider extends BlockTagsProvider {
         ;
         
         
-        this.tag(RUBlockTags.CROP_PLANTABLE_BLOCKS)
+        this.tag(BlockTags.SUPPORTS_CROPS)
             .add(RUBlocks.PEAT_FARMLAND.get())
             .add(RUBlocks.SILT_FARMLAND.get())
         ;
@@ -955,11 +947,11 @@ public class RUBlockTagProvider extends BlockTagsProvider {
             .addTag(BlockTags.LOGS)
         ;
         this.tag(RUBlockTags.SUPPORTS_INFERNAL_PLANT)
-            .addTag(BlockTags.DIRT)
+            .addTag(BlockTags.SUPPORTS_VEGETATION)
             .addTag(BlockTags.NYLIUM)
         ;
         this.tag(RUBlockTags.CATTAIL_CAN_SURVIVE_ON)
-            .addTag(BlockTags.DIRT)
+            .addTag(BlockTags.SUPPORTS_VEGETATION)
             .addTag(BlockTags.SAND)
             .add(Blocks.CLAY)
             .add(Blocks.GRAVEL)
@@ -970,11 +962,11 @@ public class RUBlockTagProvider extends BlockTagsProvider {
             .addOptionalTag(Tags.Blocks.SANDS)
         ;
         this.tag(RUBlockTags.SUPPORTS_SHRUBS)
-            .addTag(BlockTags.DIRT)
+            .addTag(BlockTags.SUPPORTS_VEGETATION)
         ;
         this.tag(RUBlockTags.SUPPORTS_FROZEN_GRASS)
             .addTag(BlockTags.SNOW)
-            .addTag(BlockTags.DIRT)
+            .addTag(BlockTags.SUPPORTS_VEGETATION)
         ;
         this.tag(RUBlockTags.SUPPORTS_ASHEN_GRASS)
             .addTag(BackportedBlockTags.SUPPORTS_VEGETATION)
@@ -1035,7 +1027,7 @@ public class RUBlockTagProvider extends BlockTagsProvider {
         ;
 
         this.tag(RUBlockTags.BIOSHROOM_GROW_BLOCK)
-            .addTag(BlockTags.DIRT)
+            .addTag(BlockTags.SUPPORTS_VEGETATION)
             .addTag(BlockTags.NYLIUM)
         ;
         this.tag(RUBlockTags.PRISMARITE_CRYSTALS)

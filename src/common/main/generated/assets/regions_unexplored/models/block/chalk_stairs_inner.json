@@ -2,7 +2,8 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "regions_unexplored:block/chalk",
+    "top": "regions_unexplored:block/chalk",
     "side": "regions_unexplored:block/chalk",
-    "top": "regions_unexplored:block/chalk"
+    "particle": "regions_unexplored:block/chalk"
   }
 }

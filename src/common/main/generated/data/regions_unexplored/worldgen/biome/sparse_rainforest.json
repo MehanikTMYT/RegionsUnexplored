@@ -147,16 +147,16 @@
         "maxCount": 4,
         "minCount": 2,
         "weight": 8
-      }
-    ],
-    "misc": [],
-    "monster": [
+      },
       {
         "type": "minecraft:ocelot",
         "maxCount": 1,
         "minCount": 1,
         "weight": 2
-      },
+      }
+    ],
+    "misc": [],
+    "monster": [
       {
         "type": "minecraft:spider",
         "maxCount": 4,

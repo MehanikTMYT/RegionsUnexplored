@@ -2,14 +2,11 @@
   "required": true,
   "minVersion": "0.8",
   "package": "net.regions_unexplored.mixin",
-  "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "removals.BiomeListMixin",
     "removals.HolderLookupMixin",
-
     "BiomeMixin",
-    "CropPlacerMixin",
     "EatBlockGoalMixin",
     "NetherrackBlockMixin",
     "TreeConfigurationMixin",
@@ -21,4 +18,3 @@
     "defaultRequire": 1
   }
 }
-
